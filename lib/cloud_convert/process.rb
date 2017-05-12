@@ -33,7 +33,6 @@ module CloudConvert
                                     "outputformat" => @output_format
                                 }) do | response|
             @step = :awaiting_conversion
-            binding.pry
             response.parsed_response[:success] = true
             create_parsed_response(:process_response, response.parsed_response)
             @process_response[:subdomain] = extract_subdomain_from_url(@process_response[:url])
@@ -49,6 +48,7 @@ module CloudConvert
                                 url: url,
                                 params: opts,
                                 multi: multi) do |response|
+                                  binding.pry
             response.parsed_response[:success] = true
             create_parsed_response(:conversion_response, response.parsed_response)
             @step = @conversion_response[:step].to_sym
